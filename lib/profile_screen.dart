@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:test_app/message_screen.dart';
 import 'package:test_app/profile.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -11,6 +12,30 @@ class ProfileScreen extends StatefulWidget {
 class _ProfileScreenState extends State<ProfileScreen> {
   late Profile _profile;
   bool isFollowing = false;
+
+  Future<void> _navigateAndDisplayMessage(BuildContext context) async {
+    final result = await Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => MessageScreen(email: _profile.email),
+      ),
+    );
+
+    // Check if the context is still valid (mounted) before usig it after an asyc gap
+    if (!context.mounted) return;
+
+    // Show an SnackBar
+    ScaffoldMessenger.of(context)
+      ..removeCurrentSnackBar()
+      ..showSnackBar(
+        SnackBar(
+          content: Text("The new email is: $result"),
+          backgroundColor: Colors.green,
+          // action: SnackBarAction(label: "Ok", onPressed: () {}),
+          duration: Duration(seconds: 2),
+        ),
+      );
+  }
 
   @override
   void initState() {
@@ -128,9 +153,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                 ),
 
-                SizedBox(width: 10),
+                const SizedBox(width: 10),
                 ElevatedButton.icon(
-                  onPressed: () {},
+                  onPressed: () => _navigateAndDisplayMessage(context),
                   icon: Icon(Icons.message),
                   label: Text("Message"),
                   style: ElevatedButton.styleFrom(
