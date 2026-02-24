@@ -110,7 +110,8 @@ class _MessageScreenState extends State<MessageScreen> {
                           if (!context.mounted) return;
                           Navigator.pop(context, message);
                         } catch (e) {
-                          if (!context.mounted) {
+                          if (!context.mounted) return;
+                          if (context.mounted) {
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(
                                 content: Text('Error $e'),
@@ -119,11 +120,9 @@ class _MessageScreenState extends State<MessageScreen> {
                             );
                           }
                         } finally {
-                          if (context.mounted) {
-                            setState(() {
-                              _isSending = false;
-                            });
-                          }
+                          setState(() {
+                            _isSending = false;
+                          });
                         }
 
                         // ScaffoldMessenger.of(context)

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:test_app/contact_me.dart';
 import 'package:test_app/message_screen.dart';
 import 'package:test_app/profile.dart';
 
@@ -14,7 +15,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   bool isFollowing = false;
 
   Future<void> _navigateAndDisplayMessage(BuildContext context) async {
-    final result = await Navigator.push(
+    final result = await Navigator.push<String>(
       context,
       MaterialPageRoute(
         builder: (context) => MessageScreen(email: _profile.email),
@@ -24,6 +25,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     // Check if the context is still valid (mounted) before usig it after an asyc gap
     if (!context.mounted) return;
 
+    if (result == null || result.isEmpty) return;
     // Show an SnackBar
     ScaffoldMessenger.of(context)
       ..removeCurrentSnackBar()
@@ -35,6 +37,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
           duration: Duration(seconds: 2),
         ),
       );
+  }
+
+  // Contact me:
+  Future<void> _navigateToContactMe(BuildContext context) async {
+    final result = await Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => ContactMe()),
+    );
+
+    print(result);
   }
 
   @override
@@ -168,6 +180,23 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                 ),
               ],
+            ),
+            SizedBox(height: 10),
+            ElevatedButton.icon(
+              onPressed: () {
+                _navigateToContactMe(context);
+              },
+              label: Text("Contact Me"),
+              icon: Icon(Icons.contact_mail_rounded),
+              iconAlignment: IconAlignment.end,
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.blue,
+                foregroundColor: Colors.white,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                textStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
+              ),
             ),
           ],
         ),
