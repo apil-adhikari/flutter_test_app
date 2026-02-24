@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:test_app/profile.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -8,10 +9,24 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-  int followersCount = 0;
+  late Profile _profile;
   bool isFollowing = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _profile = Profile(
+      name: "Apil Adhikari",
+      title: "💠Mobile App Developer",
+      email: "hello@apil.com",
+      phone: "9800000000",
+      followersCount: 0,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
+    // print(_profile.name);
     return Scaffold(
       appBar: AppBar(title: Text("My Portfolio")),
       body: Container(
@@ -22,14 +37,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
         child: Column(
           children: [
             Text(
-              "$followersCount",
+              _profile.followersCount.toString(),
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.w800),
             ),
             SizedBox(height: 10),
             CircleAvatar(backgroundColor: Colors.purple, radius: 50),
             SizedBox(height: 10),
-            const Text(
-              "Apil Adhikari",
+            Text(
+              _profile.name,
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
             SizedBox(height: 10),
@@ -47,8 +62,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                 ],
               ),
-              child: const Text(
-                "💠 Mobile App Developer",
+              child: Text(
+                _profile.title,
                 style: TextStyle(fontWeight: FontWeight.w500, fontSize: 12),
               ),
             ),
@@ -58,8 +73,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
               children: [
                 TextButton.icon(
                   onPressed: () {},
-                  label: const Text(
-                    "hello@apil.com",
+                  label: Text(
+                    _profile.email,
                     style: TextStyle(
                       color: Colors.black87,
                       fontWeight: FontWeight.w600,
@@ -71,7 +86,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
                 TextButton.icon(
                   onPressed: () {},
-                  label: const Text("9800000000"),
+                  label: Text(_profile.phone),
                   icon: Icon(Icons.phone),
                 ),
               ],
@@ -82,17 +97,22 @@ class _ProfileScreenState extends State<ProfileScreen> {
               children: [
                 ElevatedButton.icon(
                   onPressed: () {
-                    if (isFollowing) {
-                      setState(() {
-                        isFollowing = !isFollowing;
-                        followersCount--;
-                      });
-                    } else {
-                      setState(() {
-                        isFollowing = !isFollowing;
-                        followersCount++;
-                      });
-                    }
+                    // if (isFollowing) {
+                    //   setState(() {
+                    //     isFollowing = !isFollowing;
+                    //     _profile.followersCount--;
+                    //   });
+                    // } else {
+                    //   setState(() {
+                    //     isFollowing = !isFollowing;
+                    //     _profile.followersCount++;
+                    //   });
+                    // }
+
+                    setState(() {
+                      isFollowing = !isFollowing;
+                      _profile.followersCount += isFollowing ? 1 : -1;
+                    });
                   },
                   icon: isFollowing ? Icon(Icons.check) : Icon(Icons.add),
                   label: isFollowing ? Text("Following") : Text("Follow"),
@@ -126,6 +146,23 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ),
           ],
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          if (_profile.followersCount > 0) {
+            setState(() {
+              isFollowing = false;
+              _profile.followersCount = 0;
+            });
+          }
+        },
+        tooltip: "Reset data?",
+        backgroundColor: Colors.red,
+        foregroundColor: Colors.white,
+
+        mini: true,
+        shape: CircleBorder(),
+        child: Icon(Icons.restore_page_rounded),
       ),
     );
   }
