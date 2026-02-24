@@ -1,17 +1,23 @@
-# test_app
+## Next Mission:
 
-A new Flutter project.
+1. The button text changes from "Follow" to "Following".
+2. The button color changes (e.g., Blue to Grey).
+3. A counter at the top increases (e.g., "Followers: 100" → "Followers: 101").
 
-## Getting Started
+## Stateful widgets
 
-This project is a starting point for a Flutter application.
+Stateful Widgets are essential in Flutter for building dynamic user interfaces that change in real-time based on user interaction, data updates, or animations. While the widget itself is immutable, it pairs with a mutable State object that lives across rebuilds. The setState() method is used within this object to notify the framework that data has changed, triggering a rebuild of the UI to reflect these updates.
 
-A few resources to get you started if this is your first Flutter project:
+### Why Stateful Widgets are Important:
 
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
+1. Dynamic UI: They allow the app to respond to user actions (e.g., button clicks, checkbox toggles, text input).
+2. State Persistence: The State object persists even when the widget rebuilds, allowing data to be maintained throughout the app's lifecycle.
+3. Performance Optimization: Flutter intelligently rebuilds only the specific widgets affected by the state change.
+4. Real-time Updates: They are crucial for displaying changing data, such as a counter increasing or a timer ticking.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### Use of setState():
+
+Notifies the Framework: setState() tells the Flutter framework to call the build() method again.
+Updates the View: It ensures the UI is updated immediately to reflect the new data.
+
+⚠️ Without setState(), the variable might change, but the screen will not update
