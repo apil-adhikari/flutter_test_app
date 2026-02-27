@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:test_app/data_fetching.dart';
 import 'package:test_app/contact_me.dart';
 import 'package:test_app/message_screen.dart';
 import 'package:test_app/profile.dart';
@@ -46,7 +47,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
       MaterialPageRoute(builder: (context) => ContactMe()),
     );
 
-    print(result);
+    // TEST
+    debugPrint(result);
   }
 
   @override
@@ -196,6 +198,29 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   borderRadius: BorderRadius.circular(10),
                 ),
                 textStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
+              ),
+            ),
+
+            SizedBox(height: 10),
+
+            // Conatct API Form
+            ElevatedButton.icon(
+              onPressed: () {
+                // _navigateToContactApiForm(context);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => DataFetching()),
+                );
+              },
+              label: Text("API Call Demo"),
+              icon: Icon(Icons.api_rounded),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.green,
+                foregroundColor: Colors.white,
+                shadowColor: Colors.blue,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
               ),
             ),
           ],

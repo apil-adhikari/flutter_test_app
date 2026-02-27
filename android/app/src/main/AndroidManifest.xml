@@ -1,4 +1,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Start of accessing android native API -->
+        <uses-permission android:name="android.permission.INTERNET"/>
+
+    <!-- End of accessing android native API -->
+
+
     <application
         android:label="test_app"
         android:name="${applicationName}"
