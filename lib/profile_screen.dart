@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:test_app/albums_screen.dart';
 import 'package:test_app/data_fetching.dart';
 import 'package:test_app/contact_me.dart';
 import 'package:test_app/message_screen.dart';
@@ -220,6 +221,26 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 shadowColor: Colors.blue,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10),
+                ),
+              ),
+            ),
+
+            SizedBox(height: 10),
+            ElevatedButton.icon(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => AlbumsScreen()),
+                );
+              },
+              label: Text("Albums"),
+              icon: Icon(Icons.album),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.green,
+                foregroundColor: Colors.white,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                  side: BorderSide(width: 1, color: Colors.black),
                 ),
               ),
             ),
