@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:test_app/models/image_model.dart';
 import 'package:http/http.dart' as http;
@@ -13,32 +14,32 @@ class ImageGalleryScreen extends StatefulWidget {
 }
 
 Widget _buildImageItem(ImageModel image) {
+  debugPrint(image.downloadUrl);
   return ClipRRect(
     borderRadius: BorderRadius.circular(20),
-    child: Image.network(
-      image.downloadUrl,
+
+    child: CachedNetworkImage(
+      imageUrl: image.downloadUrl,
+      height: 100,
+      width: 100,
       fit: BoxFit.cover,
       filterQuality: FilterQuality.low,
-      loadingBuilder: (context, child, loadingProgress) {
-        if (loadingProgress == null) return child;
 
-        return Center(
+      placeholder: (context, url) => Container(
+        color: Colors.grey[200],
+        child: const Center(
           child: SizedBox(
-            height: 15,
-            width: 15,
-            child: CircularProgressIndicator(
-              color: Colors.green,
-              strokeWidth: 1,
-            ),
+            width: 20,
+            height: 20,
+            child: CircularProgressIndicator(strokeWidth: 2),
           ),
-        );
-      },
-      errorBuilder: (context, error, stackTrace) {
-        return Container(
-          color: Colors.grey,
-          child: Icon(Icons.error, color: Colors.white),
-        );
-      },
+        ),
+      ),
+
+      errorWidget: (context, url, error) => Container(
+        color: Colors.grey[300],
+        child: const Icon(Icons.broken_image, color: Colors.grey),
+      ),
     ),
   );
 }
@@ -200,9 +201,9 @@ class _ImageGalleryScreenState extends State<ImageGalleryScreen> {
                 itemCount: _images.length,
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
-                  childAspectRatio: 16 / 9,
                   mainAxisSpacing: 10,
                   crossAxisSpacing: 10,
+                  // childAspectRatio: 16 / 9,
                 ),
                 itemBuilder: (BuildContext context, index) =>
                     _buildImageItem(_images[index]),
