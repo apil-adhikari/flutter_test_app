@@ -4,6 +4,7 @@ import 'package:test_app/data_fetching.dart';
 import 'package:test_app/contact_me.dart';
 import 'package:test_app/message_screen.dart';
 import 'package:test_app/profile.dart';
+import 'package:test_app/screens/image_gallery_screen.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -241,6 +242,28 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10),
                   side: BorderSide(width: 1, color: Colors.black),
+                ),
+              ),
+            ),
+
+            SizedBox(height: 10),
+            ElevatedButton.icon(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => ImageGalleryScreen()),
+                );
+              },
+              label: Text("Photos API"),
+              icon: Icon(Icons.photo_rounded),
+              iconAlignment: IconAlignment.end,
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.green,
+                foregroundColor: Colors.white,
+                textStyle: TextStyle(fontWeight: FontWeight.bold),
+                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
                 ),
               ),
             ),
