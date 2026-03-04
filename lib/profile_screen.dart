@@ -4,6 +4,7 @@ import 'package:test_app/data_fetching.dart';
 import 'package:test_app/contact_me.dart';
 import 'package:test_app/message_screen.dart';
 import 'package:test_app/profile.dart';
+import 'package:test_app/provider_state_management/example_two.dart';
 import 'package:test_app/provider_state_management/home_screen.dart';
 import 'package:test_app/provider_state_management/count_example.dart';
 import 'package:test_app/screens/image_gallery_screen.dart';
@@ -295,6 +296,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   );
                 },
                 child: Text("Provider Example"),
+              ),
+              SizedBox(height: 10),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => ExampleTwo()),
+                  );
+                },
+                child: Text("Multi Provider Example"),
               ),
             ],
           ),
