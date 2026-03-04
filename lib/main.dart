@@ -1,5 +1,7 @@
 import "package:flutter/material.dart";
+import "package:provider/provider.dart";
 import "package:test_app/profile_screen.dart";
+import "package:test_app/provider_state_management/list_provider.dart";
 
 void main() {
   runApp(MyApp());
@@ -15,6 +17,15 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(title: "Learning Flutter", home: ProfileScreen());
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => NumbersProvider()),
+      ],
+      child: MaterialApp(
+        // theme: ThemeData.dark(),
+        title: "Learning Flutter",
+        home: ProfileScreen(),
+      ),
+    );
   }
 }

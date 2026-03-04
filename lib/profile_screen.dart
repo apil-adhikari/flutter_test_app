@@ -4,6 +4,8 @@ import 'package:test_app/data_fetching.dart';
 import 'package:test_app/contact_me.dart';
 import 'package:test_app/message_screen.dart';
 import 'package:test_app/profile.dart';
+import 'package:test_app/provider_state_management/home_screen.dart';
+import 'package:test_app/provider_state_management/count_example.dart';
 import 'package:test_app/screens/image_gallery_screen.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -70,204 +72,232 @@ class _ProfileScreenState extends State<ProfileScreen> {
     // print(_profile.name);
     return Scaffold(
       appBar: AppBar(title: Text("My Portfolio")),
-      body: Container(
-        width: MediaQuery.of(context).size.width,
-        padding: EdgeInsets.all(16),
-        decoration: BoxDecoration(color: Colors.blue.shade100),
+      body: SingleChildScrollView(
+        child: Container(
+          width: MediaQuery.of(context).size.width,
+          padding: EdgeInsets.all(16),
+          decoration: BoxDecoration(color: Colors.blue.shade100),
 
-        child: Column(
-          children: [
-            Text(
-              _profile.followersCount.toString(),
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.w800),
-            ),
-            SizedBox(height: 10),
-            CircleAvatar(backgroundColor: Colors.purple, radius: 50),
-            SizedBox(height: 10),
-            Text(
-              _profile.name,
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-            ),
-            SizedBox(height: 10),
-            Container(
-              padding: EdgeInsets.symmetric(horizontal: 8, vertical: 3),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(16),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black26,
-                    offset: Offset(0, 0),
-                    blurRadius: 10,
-                    spreadRadius: 2,
+          child: Column(
+            children: [
+              Text(
+                _profile.followersCount.toString(),
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w800),
+              ),
+              SizedBox(height: 10),
+              CircleAvatar(backgroundColor: Colors.purple, radius: 50),
+              SizedBox(height: 10),
+              Text(
+                _profile.name,
+                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+              ),
+              SizedBox(height: 10),
+              Container(
+                padding: EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(16),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black26,
+                      offset: Offset(0, 0),
+                      blurRadius: 10,
+                      spreadRadius: 2,
+                    ),
+                  ],
+                ),
+                child: Text(
+                  _profile.title,
+                  style: TextStyle(fontWeight: FontWeight.w500, fontSize: 12),
+                ),
+              ),
+              SizedBox(height: 10),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  TextButton.icon(
+                    onPressed: () {},
+                    label: Text(
+                      _profile.email,
+                      style: TextStyle(
+                        color: Colors.black87,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+
+                    icon: Icon(Icons.mail),
+                    style: ButtonStyle(),
+                  ),
+                  TextButton.icon(
+                    onPressed: () {},
+                    label: Text(_profile.phone),
+                    icon: Icon(Icons.phone),
                   ),
                 ],
               ),
-              child: Text(
-                _profile.title,
-                style: TextStyle(fontWeight: FontWeight.w500, fontSize: 12),
-              ),
-            ),
-            SizedBox(height: 10),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                TextButton.icon(
-                  onPressed: () {},
-                  label: Text(
-                    _profile.email,
-                    style: TextStyle(
-                      color: Colors.black87,
-                      fontWeight: FontWeight.w600,
+              SizedBox(height: 5),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  ElevatedButton.icon(
+                    onPressed: () {
+                      // if (isFollowing) {
+                      //   setState(() {
+                      //     isFollowing = !isFollowing;
+                      //     _profile.followersCount--;
+                      //   });
+                      // } else {
+                      //   setState(() {
+                      //     isFollowing = !isFollowing;
+                      //     _profile.followersCount++;
+                      //   });
+                      // }
+
+                      setState(() {
+                        isFollowing = !isFollowing;
+                        _profile.followersCount += isFollowing ? 1 : -1;
+                      });
+                    },
+                    icon: isFollowing ? Icon(Icons.check) : Icon(Icons.add),
+                    label: isFollowing ? Text("Following") : Text("Follow"),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: isFollowing
+                          ? Colors.grey.shade100
+                          : Colors.blue.shade500,
+                      foregroundColor: isFollowing ? Colors.blue : Colors.white,
+                      textStyle: TextStyle(fontWeight: FontWeight.w700),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
                     ),
                   ),
 
-                  icon: Icon(Icons.mail),
-                  style: ButtonStyle(),
-                ),
-                TextButton.icon(
-                  onPressed: () {},
-                  label: Text(_profile.phone),
-                  icon: Icon(Icons.phone),
-                ),
-              ],
-            ),
-            SizedBox(height: 5),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                ElevatedButton.icon(
-                  onPressed: () {
-                    // if (isFollowing) {
-                    //   setState(() {
-                    //     isFollowing = !isFollowing;
-                    //     _profile.followersCount--;
-                    //   });
-                    // } else {
-                    //   setState(() {
-                    //     isFollowing = !isFollowing;
-                    //     _profile.followersCount++;
-                    //   });
-                    // }
-
-                    setState(() {
-                      isFollowing = !isFollowing;
-                      _profile.followersCount += isFollowing ? 1 : -1;
-                    });
-                  },
-                  icon: isFollowing ? Icon(Icons.check) : Icon(Icons.add),
-                  label: isFollowing ? Text("Following") : Text("Follow"),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: isFollowing
-                        ? Colors.grey.shade100
-                        : Colors.blue.shade500,
-                    foregroundColor: isFollowing ? Colors.blue : Colors.white,
-                    textStyle: TextStyle(fontWeight: FontWeight.w700),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
+                  const SizedBox(width: 10),
+                  ElevatedButton.icon(
+                    onPressed: () => _navigateAndDisplayMessage(context),
+                    icon: Icon(Icons.message),
+                    label: Text("Message"),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.blue,
+                      foregroundColor: Colors.white,
+                      textStyle: TextStyle(fontWeight: FontWeight.w700),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
                     ),
                   ),
-                ),
-
-                const SizedBox(width: 10),
-                ElevatedButton.icon(
-                  onPressed: () => _navigateAndDisplayMessage(context),
-                  icon: Icon(Icons.message),
-                  label: Text("Message"),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.blue,
-                    foregroundColor: Colors.white,
-                    textStyle: TextStyle(fontWeight: FontWeight.w700),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
+                ],
+              ),
+              SizedBox(height: 10),
+              ElevatedButton.icon(
+                onPressed: () {
+                  _navigateToContactMe(context);
+                },
+                label: Text("Contact Me"),
+                icon: Icon(Icons.contact_mail_rounded),
+                iconAlignment: IconAlignment.end,
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.blue,
+                  foregroundColor: Colors.white,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  textStyle: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w700,
                   ),
                 ),
-              ],
-            ),
-            SizedBox(height: 10),
-            ElevatedButton.icon(
-              onPressed: () {
-                _navigateToContactMe(context);
-              },
-              label: Text("Contact Me"),
-              icon: Icon(Icons.contact_mail_rounded),
-              iconAlignment: IconAlignment.end,
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.blue,
-                foregroundColor: Colors.white,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                textStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
               ),
-            ),
 
-            SizedBox(height: 10),
+              SizedBox(height: 10),
 
-            // Conatct API Form
-            ElevatedButton.icon(
-              onPressed: () {
-                // _navigateToContactApiForm(context);
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => DataFetching()),
-                );
-              },
-              label: Text("API Call Demo"),
-              icon: Icon(Icons.api_rounded),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.green,
-                foregroundColor: Colors.white,
-                shadowColor: Colors.blue,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
+              // Conatct API Form
+              ElevatedButton.icon(
+                onPressed: () {
+                  // _navigateToContactApiForm(context);
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => DataFetching()),
+                  );
+                },
+                label: Text("API Call Demo"),
+                icon: Icon(Icons.api_rounded),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.green,
+                  foregroundColor: Colors.white,
+                  shadowColor: Colors.blue,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
                 ),
               ),
-            ),
 
-            SizedBox(height: 10),
-            ElevatedButton.icon(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => AlbumsScreen()),
-                );
-              },
-              label: Text("Albums"),
-              icon: Icon(Icons.album),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.green,
-                foregroundColor: Colors.white,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
-                  side: BorderSide(width: 1, color: Colors.black),
+              SizedBox(height: 10),
+              ElevatedButton.icon(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => AlbumsScreen()),
+                  );
+                },
+                label: Text("Albums"),
+                icon: Icon(Icons.album),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.green,
+                  foregroundColor: Colors.white,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    side: BorderSide(width: 1, color: Colors.black),
+                  ),
                 ),
               ),
-            ),
 
-            SizedBox(height: 10),
-            ElevatedButton.icon(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => ImageGalleryScreen()),
-                );
-              },
-              label: Text("Photos API"),
-              icon: Icon(Icons.photo_rounded),
-              iconAlignment: IconAlignment.end,
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.green,
-                foregroundColor: Colors.white,
-                textStyle: TextStyle(fontWeight: FontWeight.bold),
-                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
+              SizedBox(height: 10),
+              ElevatedButton.icon(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ImageGalleryScreen(),
+                    ),
+                  );
+                },
+                label: Text("Photos API"),
+                icon: Icon(Icons.photo_rounded),
+                iconAlignment: IconAlignment.end,
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.green,
+                  foregroundColor: Colors.white,
+                  textStyle: TextStyle(fontWeight: FontWeight.bold),
+                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
                 ),
               ),
-            ),
-          ],
+
+              SizedBox(height: 10),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => HomeScreen()),
+                  );
+                },
+                child: Text("Home"),
+              ),
+              SizedBox(height: 10),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => CountExample()),
+                  );
+                },
+                child: Text("Provider Example"),
+              ),
+            ],
+          ),
         ),
       ),
       floatingActionButton: FloatingActionButton(

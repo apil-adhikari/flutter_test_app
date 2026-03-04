@@ -406,3 +406,7 @@ void main() {
 ```
 
 # Why do we need Class (for models) at all???
+
+It helps to create a typeed structure of the data.
+
+# Overview: State Management with Provider
