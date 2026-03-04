@@ -2,6 +2,7 @@ import "package:flutter/material.dart";
 import "package:provider/provider.dart";
 import "package:test_app/profile_screen.dart";
 import "package:test_app/provider_state_management/example_two_provider.dart";
+import "package:test_app/provider_state_management/favourite_provider.dart";
 import "package:test_app/provider_state_management/list_provider.dart";
 
 void main() {
@@ -22,6 +23,7 @@ class _MyAppState extends State<MyApp> {
       providers: [
         ChangeNotifierProvider(create: (context) => NumbersProvider()),
         ChangeNotifierProvider(create: (context) => ExampleTwoProvider()),
+        ChangeNotifierProvider(create: (context) => FavouriteProvider()),
       ],
       child: MaterialApp(
         // theme: ThemeData.dark(),
