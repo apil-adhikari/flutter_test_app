@@ -4,6 +4,9 @@ import "package:test_app/profile_screen.dart";
 import "package:test_app/provider_state_management/example_two_provider.dart";
 import "package:test_app/provider_state_management/favourite_provider.dart";
 import "package:test_app/provider_state_management/list_provider.dart";
+import "package:test_app/provider_state_management/theme_changer_provider.dart";
+import "package:test_app/screens/dart_theme/dark_theme.dart";
+import "package:test_app/themes/theme.dart";
 
 void main() {
   runApp(MyApp());
@@ -24,11 +27,19 @@ class _MyAppState extends State<MyApp> {
         ChangeNotifierProvider(create: (context) => NumbersProvider()),
         ChangeNotifierProvider(create: (context) => ExampleTwoProvider()),
         ChangeNotifierProvider(create: (context) => FavouriteProvider()),
+        ChangeNotifierProvider(create: (context) => ThemeChangerProvider()),
       ],
-      child: MaterialApp(
-        // theme: ThemeData.dark(),
-        title: "Learning Flutter",
-        home: ProfileScreen(),
+      child: Builder(
+        builder: (BuildContext context) {
+          final themeProvider = Provider.of<ThemeChangerProvider>(context);
+          return MaterialApp(
+            title: "Learning Flutter",
+            home: ProfileScreen(),
+            theme: lightTheme,
+            darkTheme: darkTheme,
+            themeMode: themeProvider.currentTheme,
+          );
+        },
       ),
     );
   }

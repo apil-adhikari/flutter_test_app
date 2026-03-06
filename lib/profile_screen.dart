@@ -7,6 +7,7 @@ import 'package:test_app/profile.dart';
 import 'package:test_app/provider_state_management/example_two.dart';
 import 'package:test_app/provider_state_management/home_screen.dart';
 import 'package:test_app/provider_state_management/count_example.dart';
+import 'package:test_app/screens/dart_theme/dark_theme.dart';
 import 'package:test_app/screens/favourite/favorite_screen.dart';
 import 'package:test_app/screens/image_gallery_screen.dart';
 
@@ -318,6 +319,29 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => FavoriteScreen()),
+                  );
+                },
+
+                style: ElevatedButton.styleFrom(
+                  foregroundColor: Colors.white,
+                  backgroundColor: const Color.fromARGB(255, 54, 55, 116),
+                  textStyle: TextStyle(fontWeight: FontWeight.bold),
+                  iconColor: Colors.red,
+                  iconSize: 32,
+                  padding: EdgeInsets.all(10),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
+              ),
+              SizedBox(height: 20),
+              ElevatedButton.icon(
+                label: Text('Theme Changer'),
+                icon: Icon(Icons.color_lens),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => DarkTheme()),
                   );
                 },
 
