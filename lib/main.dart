@@ -5,7 +5,6 @@ import "package:test_app/provider_state_management/example_two_provider.dart";
 import "package:test_app/provider_state_management/favourite_provider.dart";
 import "package:test_app/provider_state_management/list_provider.dart";
 import "package:test_app/provider_state_management/theme_changer_provider.dart";
-import "package:test_app/screens/dart_theme/dark_theme.dart";
 import "package:test_app/themes/theme.dart";
 
 void main() {
@@ -31,13 +30,15 @@ class _MyAppState extends State<MyApp> {
       ],
       child: Builder(
         builder: (BuildContext context) {
-          final themeProvider = Provider.of<ThemeChangerProvider>(context);
-          return MaterialApp(
-            title: "Learning Flutter",
-            home: ProfileScreen(),
-            theme: lightTheme,
-            darkTheme: darkTheme,
-            themeMode: themeProvider.currentTheme,
+          // final themeProvider = Provider.of<ThemeChangerProvider>(context);
+          return Consumer<ThemeChangerProvider>(
+            builder: (context, themeProvider, child) => MaterialApp(
+              title: "Learning Flutter",
+              home: ProfileScreen(),
+              theme: lightTheme,
+              darkTheme: darkTheme,
+              themeMode: themeProvider.currentTheme,
+            ),
           );
         },
       ),

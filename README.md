@@ -410,3 +410,54 @@ void main() {
 It helps to create a typeed structure of the data.
 
 # Overview: State Management with Provider
+
+# `ThemeMode` vs `ThemeData`
+
+1.  `ThemeMode`: An enum that tells MaterialApp which theme to use.
+    For Example: Pass to: `MaterialApp.themeMode`
+
+        ThemeMode.light
+        ThemeMode.dark
+        ThemeMode.system
+
+2.  `ThemeData`: The actual styling configuration (colors, fonts, shapes). For Example:
+    Pass to `MaterialApp.theme` and `darkTheme`
+
+            ThemeData.light()
+            ThemeData.dark()
+
+            or our custom theme here
+
+Example:
+
+```dart
+// Incorrect
+final lightTheme = ThemeMode.light;  // This is an enum, not styling!
+
+// Correct:
+final lightTheme = ThemeData.light();  // or your custom ThemeData
+final darkTheme = ThemeData.dark();    // or your custom ThemeData
+```
+
+### Why this matters:
+
+```dart
+   return MaterialApp(
+            title: "Learning Fluter",
+            home: MyScreen(),
+            theme: lightTheme,
+            darkTheme: darkTheme,
+            themeMode: themeProvider.currentTheme, // this can be any theme of choice
+          );
+
+```
+
+**MaterialApp needs to know**:
+
+1. What styles to use for light mode → `theme: ThemeData(...)`
+2. What styles to use for dark mode → `darkTheme: ThemeData(...)`
+3. Which one to show right now → `themeMode: ThemeMode.dark`
+
+# `StatelessWidget` is simpler and more efficient when we don't need `setState`
+
+So we need to use `StatelessWidget` as much as possible when we don't need `setState` in our application or widget.
