@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class FavouriteProvider extends ChangeNotifier {
-  List<int> _favouriteItems = [];
+  final List<int> _favouriteItems = [];
   List<int> get favouriteItems => _favouriteItems;
 
   void addToFavourite(int value) {

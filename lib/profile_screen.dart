@@ -10,6 +10,7 @@ import 'package:test_app/provider_state_management/count_example.dart';
 import 'package:test_app/screens/dart_theme/dark_theme.dart';
 import 'package:test_app/screens/favourite/favorite_screen.dart';
 import 'package:test_app/screens/image_gallery_screen.dart';
+import 'package:test_app/screens/shared_preferences_example.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -335,6 +336,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
               ),
               SizedBox(height: 20),
+
               ElevatedButton.icon(
                 label: Text('Theme Changer'),
                 icon: Icon(Icons.color_lens),
@@ -350,6 +352,33 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   backgroundColor: const Color.fromARGB(255, 54, 55, 116),
                   textStyle: TextStyle(fontWeight: FontWeight.bold),
                   iconColor: Colors.red,
+                  iconSize: 32,
+                  padding: EdgeInsets.all(10),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
+              ),
+              SizedBox(height: 20),
+
+              // Shared Preferences Example:
+              ElevatedButton.icon(
+                label: Text('Shared Preferences Example'),
+                icon: Icon(Icons.room_preferences_rounded),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => SharedPreferencesExample(),
+                    ),
+                  );
+                },
+
+                style: ElevatedButton.styleFrom(
+                  foregroundColor: Colors.white,
+                  backgroundColor: const Color.fromARGB(255, 54, 55, 116),
+                  textStyle: TextStyle(fontWeight: FontWeight.bold),
+                  iconColor: Colors.green,
                   iconSize: 32,
                   padding: EdgeInsets.all(10),
                   shape: RoundedRectangleBorder(

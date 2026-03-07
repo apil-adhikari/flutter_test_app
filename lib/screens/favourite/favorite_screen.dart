@@ -52,7 +52,7 @@ class _FavouriteScreenState extends State<FavoriteScreen> {
                             ..showSnackBar(
                               SnackBar(
                                 content: Text(
-                                  'Item $index added to favourite',
+                                  'Item $index removed from favourite',
                                   style: TextStyle(fontWeight: FontWeight.bold),
                                 ),
                                 backgroundColor: Colors.red,

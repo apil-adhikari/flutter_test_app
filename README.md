@@ -461,3 +461,41 @@ final darkTheme = ThemeData.dark();    // or your custom ThemeData
 # `StatelessWidget` is simpler and more efficient when we don't need `setState`
 
 So we need to use `StatelessWidget` as much as possible when we don't need `setState` in our application or widget.
+
+# Local Persistence in Flutter
+
+Local persistence in Flutter allows apps to store data directly on the user's device so that it will remain available even after the app is closed. This is essential for user preferences, offline access, and improved performance. Flutter offers several methods for local persistence, depending on the type and complexity of the data.
+
+## Key-Value pair:
+
+1. shared_preferences: It is used to store non-sensitive data. Data is stored asynchronously.
+2. flutter_secure_storage: Used for sensitive data like API keys, authentication tokens. It uses secure, platform-specifyic storage (Keychain on iOS and Keystore on Android).
+3. hive: A fast lightweight NoSQL key-value storage written in pure dart, suitable for simple data and caching.
+
+## Relational Database(Structured Data):
+
+Use for complex, structured, or relational data that requires advanced queries, filtering, and indexing.
+
+1. sqflite: A robust, full-featured SQLite plugin for Flutter. It requires writing SQL queries and is ideal for medium to large-sized apps.
+
+2. Drift (formerly Moor): A type-safe, reactive persistence library built on top of SQLite, allowing developers to write queries in Dart with compile-time checks.
+
+## NoSQL Databases (Structured/Object data):
+
+Use for storing data as objects or complex, non-relational data.
+
+1. Isar: A high-performance NoSQL database optimized for mobile devices, known for its speed and simple API.
+2. ObjectBox: Another fast NoSQL option that uses an object-oriented approach, eliminating the need for manual object-to-table mapping.
+
+## Reading and Writing Files (Raw data):
+
+For saving raw data like images, documents, or JSON files directly to disk, combine the `path_provider` package with the `dart:io` library to access the correct local file paths
+
+## Choosing the Right Tool
+
+The ideal method depends on your app's specific requirements:
+
+- Simple settings? Use shared_preferences or Hive.
+- Sensitive information? Use flutter_secure_storage.
+- Complex, relational data? Use sqflite or Drift.
+  Large, non-relational data or caching? Use Hive, Isar, or ObjectBox.

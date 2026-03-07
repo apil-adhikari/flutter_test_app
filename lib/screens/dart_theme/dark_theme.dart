@@ -20,11 +20,12 @@ class _DarkThemeState extends State<DarkTheme> {
         title: Text('Theme Changer'),
         elevation: 1,
         actions: [
-          Consumer<ThemeChangerProvider>(
-            builder: (context, themeProviderValue, child) => Icon(
-              themeProviderValue.currentTheme == ThemeMode.light
+          Selector<ThemeChangerProvider, ThemeMode>(
+            selector: (p0, p1) => p1.currentTheme,
+            builder: (context, currentTheme, child) => Icon(
+              currentTheme == ThemeMode.light
                   ? Icons.wb_sunny_outlined
-                  : themeProviderValue.currentTheme == ThemeMode.dark
+                  : currentTheme == ThemeMode.dark
                   ? Icons.sunny
                   : Icons.autofps_select_rounded,
             ),
@@ -47,10 +48,6 @@ class _DarkThemeState extends State<DarkTheme> {
                   CupertinoSwitch(
                     value: themeProviderValue.systemTheme,
                     onChanged: (newValue) {
-                      // print(newValue);
-                      // themeProviderValue.setTheme(
-                      //   newValue ? ThemeMode.system : ThemeMode.light,
-                      // );
                       newValue
                           ? themeProviderValue.useSystemTheme()
                           : themeProviderValue.useLightTheme();
