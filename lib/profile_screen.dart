@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:test_app/albums_screen.dart';
 import 'package:test_app/data_fetching.dart';
 import 'package:test_app/contact_me.dart';
@@ -10,7 +11,10 @@ import 'package:test_app/provider_state_management/count_example.dart';
 import 'package:test_app/screens/dart_theme/dark_theme.dart';
 import 'package:test_app/screens/favourite/favorite_screen.dart';
 import 'package:test_app/screens/image_gallery_screen.dart';
+import 'package:test_app/screens/shared_preferences/sp_home_screen.dart';
+import 'package:test_app/screens/shared_preferences/sp_login_screen.dart';
 import 'package:test_app/screens/shared_preferences_example.dart';
+import 'package:test_app/utils/constants.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -387,6 +391,28 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
               ),
               SizedBox(height: 20),
+
+              // Shared Prefrences Login Screen Example:
+              ElevatedButton.icon(
+                label: Text('Shared Preferences Login Example'),
+                icon: Icon(Icons.room_preferences_rounded),
+                onPressed: () async {
+                  checkLoginStatus();
+                },
+
+                style: ElevatedButton.styleFrom(
+                  foregroundColor: Colors.white,
+                  backgroundColor: const Color.fromARGB(255, 54, 55, 116),
+                  textStyle: TextStyle(fontWeight: FontWeight.bold),
+                  iconColor: Colors.green,
+                  iconSize: 32,
+                  padding: EdgeInsets.all(10),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
+              ),
+              SizedBox(height: 20),
             ],
           ),
         ),
@@ -409,5 +435,28 @@ class _ProfileScreenState extends State<ProfileScreen> {
         child: Icon(Icons.restore_page_rounded),
       ),
     );
+  }
+
+  void checkLoginStatus() async {
+    try {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+
+      if (!mounted) return;
+      bool? isLoggedIn = prefs.getBool(Constants.KEYLOGIN);
+
+      if (isLoggedIn == true) {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => SpHomeScreen()),
+        );
+      } else {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => SpLoginScreen()),
+        );
+      }
+    } catch (e) {
+      print('Error saving preferences: $e');
+    }
   }
 }

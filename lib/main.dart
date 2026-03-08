@@ -4,6 +4,7 @@ import "package:test_app/profile_screen.dart";
 import "package:test_app/provider_state_management/example_two_provider.dart";
 import "package:test_app/provider_state_management/favourite_provider.dart";
 import "package:test_app/provider_state_management/list_provider.dart";
+import "package:test_app/provider_state_management/sp_login_screen_provider.dart";
 import "package:test_app/provider_state_management/theme_changer_provider.dart";
 import "package:test_app/themes/theme.dart";
 
@@ -27,6 +28,7 @@ class _MyAppState extends State<MyApp> {
         ChangeNotifierProvider(create: (context) => ExampleTwoProvider()),
         ChangeNotifierProvider(create: (context) => FavouriteProvider()),
         ChangeNotifierProvider(create: (context) => ThemeChangerProvider()),
+        ChangeNotifierProvider(create: (context) => SpLoginScreenProvider()),
       ],
       child: Builder(
         builder: (BuildContext context) {
