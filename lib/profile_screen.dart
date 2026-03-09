@@ -9,6 +9,7 @@ import 'package:test_app/provider_state_management/example_two.dart';
 import 'package:test_app/provider_state_management/home_screen.dart';
 import 'package:test_app/provider_state_management/count_example.dart';
 import 'package:test_app/screens/dart_theme/dark_theme.dart';
+import 'package:test_app/screens/dart_theme/theme_screen.dart';
 import 'package:test_app/screens/favourite/favorite_screen.dart';
 import 'package:test_app/screens/image_gallery_screen.dart';
 import 'package:test_app/screens/shared_preferences/sp_home_screen.dart';
@@ -398,6 +399,29 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 icon: Icon(Icons.room_preferences_rounded),
                 onPressed: () async {
                   checkLoginStatus();
+                },
+
+                style: ElevatedButton.styleFrom(
+                  foregroundColor: Colors.white,
+                  backgroundColor: const Color.fromARGB(255, 54, 55, 116),
+                  textStyle: TextStyle(fontWeight: FontWeight.bold),
+                  iconColor: Colors.green,
+                  iconSize: 32,
+                  padding: EdgeInsets.all(10),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
+              ),
+              SizedBox(height: 20),
+              ElevatedButton.icon(
+                label: Text('App Theme Sys pref'),
+                icon: Icon(Icons.color_lens_rounded),
+                onPressed: () async {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => ThemeScreen()),
+                  );
                 },
 
                 style: ElevatedButton.styleFrom(

@@ -6,6 +6,8 @@ import "package:test_app/provider_state_management/favourite_provider.dart";
 import "package:test_app/provider_state_management/list_provider.dart";
 import "package:test_app/provider_state_management/sp_login_screen_provider.dart";
 import "package:test_app/provider_state_management/theme_changer_provider.dart";
+import "package:test_app/provider_state_management/theme_provider.dart";
+import "package:test_app/themes/app_theme.dart";
 import "package:test_app/themes/theme.dart";
 
 void main() {
@@ -29,17 +31,18 @@ class _MyAppState extends State<MyApp> {
         ChangeNotifierProvider(create: (context) => FavouriteProvider()),
         ChangeNotifierProvider(create: (context) => ThemeChangerProvider()),
         ChangeNotifierProvider(create: (context) => SpLoginScreenProvider()),
+        ChangeNotifierProvider(create: (context) => ThemeProvider()),
       ],
       child: Builder(
         builder: (BuildContext context) {
           // final themeProvider = Provider.of<ThemeChangerProvider>(context);
-          return Consumer<ThemeChangerProvider>(
+          return Consumer<ThemeProvider>(
             builder: (context, themeProvider, child) => MaterialApp(
               title: "Learning Flutter",
               home: ProfileScreen(),
-              theme: lightTheme,
-              darkTheme: darkTheme,
-              themeMode: themeProvider.currentTheme,
+              theme: AppTheme.lightTheme,
+              darkTheme: AppTheme.darkTheme,
+              themeMode: themeProvider.themeMode,
             ),
           );
         },
