@@ -5,7 +5,7 @@ class AppTheme {
   static ThemeData lightTheme = ThemeData(
     brightness: Brightness.light,
     colorScheme: ColorScheme.fromSeed(
-      seedColor: Colors.black,
+      seedColor: Colors.blue,
       brightness: Brightness.light,
     ),
     appBarTheme: AppBarTheme(centerTitle: true, elevation: 1),
@@ -27,16 +27,30 @@ class AppTheme {
     ),
     inputDecorationTheme: InputDecorationTheme(
       border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
+      enabledBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(8),
+        borderSide: BorderSide(width: 2),
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(8),
+        borderSide: BorderSide(width: 2),
+      ),
+      errorBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(8),
+        borderSide: BorderSide(
+          width: 2
+        )
+      ),
       filled: true,
     ),
   );
 
   // Dark Theme
   static ThemeData darkTheme = ThemeData(
-    brightness: Brightness.light,
+    brightness: Brightness.dark,
     colorScheme: ColorScheme.fromSeed(
       seedColor: Colors.blue,
-      brightness: Brightness.light,
+      brightness: Brightness.dark,
     ),
     appBarTheme: AppBarTheme(centerTitle: true, elevation: 1),
     cardTheme: CardThemeData(

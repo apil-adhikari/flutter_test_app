@@ -8,7 +8,7 @@ import "package:test_app/provider_state_management/sp_login_screen_provider.dart
 import "package:test_app/provider_state_management/theme_changer_provider.dart";
 import "package:test_app/provider_state_management/theme_provider.dart";
 import "package:test_app/themes/app_theme.dart";
-import "package:test_app/themes/theme.dart";
+
 
 void main() {
   runApp(MyApp());
